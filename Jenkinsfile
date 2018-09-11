@@ -106,9 +106,4 @@ pipeline {
       }
     }
   }
-  environment {
-    aggregate = ''
-    match = ''
-    load_annul = ''
-  }
 }

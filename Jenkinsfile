@@ -2,15 +2,24 @@ pipeline {
   agent any
   stages {
     stage('load_annul') {
-      when {
-        expression {
-          return params.load_annul
-        }
+      parallel {
+        stage('load_annul') {
+          when {
+            expression {
+              return params.load_annul
+            }
 
-      }
-      steps {
-        sleep 2
-        echo 'load_annul DONE'
+          }
+          steps {
+            sleep 2
+            echo 'load_annul DONE'
+          }
+        }
+        stage('') {
+          steps {
+            mail(subject: 'Stage', body: 'Stage load_annul finished', from: 'Jenkins', to: 'viktor.lutskevich@firstlinesoftware.com')
+          }
+        }
       }
     }
     stage('Parallel Stages') {

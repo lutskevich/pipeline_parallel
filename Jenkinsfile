@@ -15,7 +15,7 @@ pipeline {
             echo 'load_annul DONE'
           }
         }
-        stage('') {
+        stage('error') {
           steps {
             mail(subject: 'Stage', body: 'Stage load_annul finished', from: 'Jenkins', to: 'viktor.lutskevich@firstlinesoftware.com')
           }
@@ -112,6 +112,13 @@ pipeline {
       steps {
         sleep 5
         echo 'knp_fc DONE'
+        sh '''#!/bin/bash
+
+echo -n "Start Stage $1"
+sleep 5
+echo ">> >> >> >> >> >> Stage $1 status: success. << << << << << <<";
+
+exit 0'''
       }
     }
   }
